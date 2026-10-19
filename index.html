@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.github.com">
+  <title>Zetapro</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Zetapro">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+</head>
+<body data-view="play">
+  <header class="topbar">
+    <div class="brand"><img src="icons/icon-192.png" alt="" width="22" height="22"><span>Zetapro</span></div>
+    <nav class="tabs" aria-label="Sections">
+      <button class="tab" data-view="play">Play</button>
+      <button class="tab" data-view="drill">Drill</button>
+      <button class="tab" data-view="stats">Stats</button>
+      <button class="tab" data-view="e80">80 in 8</button>
+    </nav>
+    <div class="top-right">
+      <button class="sync-btn" id="syncBtn" data-state="off" title="Sync across devices"><span class="sync-dot"></span><span id="syncText">Sync off</span></button>
+      <div class="seg theme-seg" role="group" aria-label="Theme">
+        <button data-theme="system">Auto</button>
+        <button data-theme="light">Light</button>
+        <button data-theme="dark">Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Play: Zetamac's settings page -->
+    <section class="view" id="view-play">
+      <div class="play-grid">
+        <form class="card setup" id="setupForm" autocomplete="off">
+          <h1>Arithmetic Game</h1>
+          <p class="lede">Answer as many as you can before time runs out. An answer is taken the instant it's right — no Enter needed.</p>
+
+          <div class="op-row">
+            <label class="check"><input type="checkbox" id="op-add"><span>Addition</span></label>
+            <div class="range"><span class="range-label">Range:</span><span class="rg">(<input type="number" id="add0" min="0" max="9999"> to <input type="number" id="add1" min="0" max="9999">)</span><span>+</span><span class="rg">(<input type="number" id="add2" min="0" max="9999"> to <input type="number" id="add3" min="0" max="9999">)</span></div>
+          </div>
+          <div class="op-row">
+            <label class="check"><input type="checkbox" id="op-sub"><span>Subtraction</span></label>
+            <div class="range muted">Addition problems in reverse.</div>
+          </div>
+          <div class="op-row">
+            <label class="check"><input type="checkbox" id="op-mul"><span>Multiplication</span></label>
+            <div class="range"><span class="range-label">Range:</span><span class="rg">(<input type="number" id="mul0" min="0" max="9999"> to <input type="number" id="mul1" min="0" max="9999">)</span><span>×</span><span class="rg">(<input type="number" id="mul2" min="0" max="9999"> to <input type="number" id="mul3" min="0" max="9999">)</span></div>
+          </div>
+          <div class="op-row">
+            <label class="check"><input type="checkbox" id="op-div"><span>Division</span></label>
+            <div class="range muted">Multiplication problems in reverse.</div>
+          </div>
+
+          <div class="field-row">
+            <label for="duration">Duration</label>
+            <select id="duration"></select>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary big" type="submit" id="startBtn">Start <kbd>Enter</kbd></button>
+            <button class="btn link" type="button" id="defaultsBtn">Restore Zetamac defaults</button>
+          </div>
+        </form>
+
+        <aside class="side">
+          <div class="card" id="recordCard"></div>
+          <div class="card" id="focusCard"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Drill -->
+    <section class="view" id="view-drill">
+      <div class="page-head">
+        <div>
+          <h1>Drill</h1>
+          <p class="lede">Timed rounds built from what slows you down. Drills flag wrong digits in red as you type; classic games don't, just like Zetamac.</p>
+        </div>
+        <label class="inline-field">Drill length <select id="drillDuration"></select></label>
+      </div>
+      <div class="drill-grid">
+        <div class="card drill-card" id="smartCard"></div>
+        <div class="card drill-card" id="retryCard"></div>
+      </div>
+      <div class="card" id="customCard"></div>
+    </section>
+
+    <!-- Stats -->
+    <section class="view" id="view-stats">
+      <div class="page-head">
+        <h1>Stats</h1>
+        <div class="filters">
+          <div class="seg" id="rangeSeg" role="group" aria-label="Time range"></div>
+          <label class="check small"><input type="checkbox" id="incDrills"><span>Include drills</span></label>
+        </div>
+      </div>
+      <div id="statsBody"></div>
+      <footer class="stats-foot">
+        <button class="btn ghost" id="exportBtn">Export CSV</button>
+        <button class="btn ghost" id="folderBtn">Open data folder</button>
+        <button class="btn ghost danger" id="resetBtn">Reset stats…</button>
+      </footer>
+    </section>
+
+    <!-- 80 in 8: setup, record and per-type stats -->
+    <section class="view" id="view-e80">
+      <div class="page-head">
+        <div>
+          <h1>80 in 8</h1>
+          <p class="lede">An Optiver-style mental maths screen: 80 multiple-choice questions in 8 minutes, no calculator. Whole numbers, decimals, fractions and missing-number questions.</p>
+        </div>
+      </div>
+      <div class="play-grid">
+        <div class="card setup">
+          <h2>The test</h2>
+          <ul class="rules">
+            <li><b>80 questions, 8:00</b> on the clock: about 6 seconds each.</li>
+            <li><b>4 options</b> per question. <span class="kbd-only">Press <kbd>1</kbd>–<kbd>4</kbd> or click.</span><span class="touch-only">Tap one.</span> Picking an answer moves on, and there's no going back.</li>
+            <li class="rule-inline"><b>Scoring:</b> +1 right,
+              <select id="e80Penalty" aria-label="Penalty for a wrong answer"><option value="1">−1</option><option value="2">−2</option></select> wrong.</li>
+            <li><label class="check"><input type="checkbox" id="e80Skip"><span>Allow skipping with <kbd>Space</kbd> (scores 0)</span></label></li>
+          </ul>
+          <div class="actions">
+            <button class="btn primary big" id="e80Start">Start <kbd>Enter</kbd></button>
+          </div>
+          <p class="fine">Optiver has never published the exact format. This follows the most common candidate reports: four options, +1 / −1, no skipping, and a pass line around 55 net. Some reports say −2 per wrong answer instead.</p>
+        </div>
+        <aside class="side">
+          <div class="card" id="e80Record"></div>
+          <div class="card" id="e80Focus"></div>
+        </aside>
+      </div>
+      <div id="e80Body"></div>
+    </section>
+
+    <!-- Results -->
+    <section class="view" id="view-results">
+      <div class="card hero-card">
+        <div class="hero-top">
+          <div>
+            <div class="hero-label" id="resLabel">Score</div>
+            <div class="hero-row"><span class="hero" id="resScore">0</span><span class="badge" id="resBadge" hidden></span></div>
+            <p class="hero-sub" id="resSub"></p>
+          </div>
+          <div class="tiles compact" id="resKpis"></div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="againBtn">Try again <kbd>Enter</kbd></button>
+          <button class="btn" id="drillMissesBtn">Drill this round's misses</button>
+          <button class="btn ghost" id="resBackBtn">Back <kbd>Esc</kbd></button>
+        </div>
+      </div>
+      <div class="res-cols">
+        <div class="card"><h2 id="resH1">Missed this round</h2><div id="resMissed"></div></div>
+        <div class="card"><h2 id="resH2">Slowest this round</h2><div id="resSlow"></div></div>
+        <div class="card"><h2 id="resH3">By operation</h2><div id="resOps"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Game: outside <main> so it can own the whole window -->
+  <section class="view game" id="view-game">
+    <div class="banner">
+      <span id="secondsLeft">Seconds left: 120</span>
+      <span class="game-label" id="gameLabel"></span>
+      <span class="banner-right"><span id="scoreLabel">Score: 0</span><button class="quit" id="quitBtn" aria-label="Quit this round">Quit</button></span>
+    </div>
+    <div class="timebar"><span id="timebar"></span></div>
+    <div class="arena">
+      <div class="problem">
+        <span id="problemText"></span>
+        <span class="eq">=</span>
+        <input id="answer" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="7" aria-label="Answer">
+      </div>
+    </div>
+    <p class="game-hint"><kbd>Esc</kbd> to quit</p>
+  </section>
+
+  <!-- 80 in 8 test screen -->
+  <section class="view game" id="view-e80game">
+    <div class="banner">
+      <span id="e80Time">Time left 8:00</span>
+      <span class="game-label" id="e80Label"></span>
+      <span class="banner-right"><span id="e80Count">Question 1 of 80</span><button class="quit" id="e80QuitBtn" aria-label="Quit this attempt">Quit</button></span>
+    </div>
+    <div class="timebar"><span id="e80Timebar"></span></div>
+    <div class="arena">
+      <div class="e80-stage">
+        <div class="e80-q" id="e80Question"></div>
+        <div class="e80-opts" id="e80Opts"></div>
+      </div>
+    </div>
+    <p class="game-hint" id="e80Hint"></p>
+  </section>
+
+  <div class="modal" id="syncModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="syncTitle">
+      <div class="card-head"><h2 id="syncTitle">Sync across devices</h2><button class="btn ghost small" id="syncClose">Close</button></div>
+      <div id="syncBody"></div>
+    </div>
+  </div>
+
+  <div id="tip" class="tip" hidden></div>
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="engine.js"></script>
+  <script src="stats.js"></script>
+  <script src="e80.js"></script>
+  <script src="datamodel.js"></script>
+  <script src="web-store.js"></script>
+  <script src="sync.js"></script>
+  <script src="charts.js"></script>
+  <script src="app.js"></script>
+  <script src="pwa.js"></script>
+</body>
+</html>
