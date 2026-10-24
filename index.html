@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zetapro</title>
+  <meta name="description" content="Free mental maths trainer: a Zetamac-style speed game and an Optiver-style 80 in 8, with stats that show which problems slow you down. Play in your browser, on your phone, or download for Windows.">
+  <meta property="og:title" content="Zetapro: get faster at mental maths">
+  <meta property="og:description" content="Zetamac-style speed game and Optiver-style 80 in 8, with stats on what slows you down.">
+  <meta property="og:image" content="shots/stats.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="./"><img src="icons/icon-192.png" alt="" width="28" height="28">Zetapro</a>
+    <a class="btn small" href="app/">Open app</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Get faster at mental maths.</h1>
+      <p class="lede">A Zetamac-style speed game and an Optiver-style “80 in 8”, with stats that show exactly which kinds of problems slow you down, and drills that fix them.</p>
+      <div class="cta">
+        <a class="btn primary big" href="app/">Play in your browser</a>
+        <a class="btn big" id="dlTop" href="https://github.com/amirkhan0725/zetapro/releases/latest/download/Zetapro-Windows-x64.zip">Download for Windows</a>
+      </div>
+      <p class="fine">Free · no account · your scores stay on your device</p>
+      <img class="shot hero-shot" src="shots/game.png" alt="Zetapro game screen: 7 × 86 with an answer box, seconds left and score" width="1770" height="1260">
+    </section>
+
+    <section id="get">
+      <h2>Three ways to use it</h2>
+      <div class="ways">
+        <article class="way" id="way-browser">
+          <h3>In your browser</h3>
+          <p>Works on any computer, tablet or phone. Nothing to install.</p>
+          <a class="btn primary" href="app/">Open Zetapro</a>
+        </article>
+        <article class="way" id="way-phone">
+          <h3>On your phone</h3>
+          <p>Open the app, then add it to your home screen. It opens full-screen and works offline.</p>
+          <ul>
+            <li><b>iPhone:</b> Safari → Share → <i>Add to Home Screen</i></li>
+            <li><b>Android:</b> Chrome → ⋮ → <i>Install app</i></li>
+          </ul>
+          <a class="btn" href="app/">Open on this phone</a>
+        </article>
+        <article class="way" id="way-windows">
+          <h3>Windows app</h3>
+          <p>A standalone desktop app. Download, unzip anywhere, and run <code>Zetapro.exe</code>.</p>
+          <a class="btn" href="https://github.com/amirkhan0725/zetapro/releases/latest/download/Zetapro-Windows-x64.zip">Download .zip<span class="muted"> · 158 MB</span></a>
+          <p class="fine">Windows may warn that the publisher is unknown, because the app isn't code-signed. Click <i>More info → Run anyway</i>.</p>
+        </article>
+      </div>
+      <p class="fine center">On a Mac? Use the browser version. In Chrome you can also install it as an app from the address bar.</p>
+    </section>
+
+    <section>
+      <h2>What's inside</h2>
+      <div class="features">
+        <div><h3>Classic Zetamac</h3><p>Same rules and defaults: 2 minutes, answers accepted the instant they're right.</p></div>
+        <div><h3>Find your weak spots</h3><p>Every problem is timed and sorted by type: carries, borrows, each times table, 2-digit products.</p></div>
+        <div><h3>Targeted drills</h3><p>Rounds built from your slowest types, or the exact problems you keep missing.</p></div>
+        <div><h3>80 in 8</h3><p>80 multiple-choice questions in 8 minutes: decimals, fractions, missing numbers. Net scoring.</p></div>
+        <div><h3>Goals</h3><p>Set a target score and track how consistently you hit it, not just your best.</p></div>
+        <div><h3>Optional sync</h3><p>Keep phone and computer in step through your own private GitHub repository.</p></div>
+      </div>
+      <div class="shots">
+        <img class="shot" src="shots/stats.png" alt="Stats page: score per game chart with a goal line" loading="lazy" width="1770" height="1260">
+        <img class="shot" src="shots/factors.png" alt="Factor map heat map and mistake patterns" loading="lazy" width="1770" height="1260">
+        <img class="shot" src="shots/e80.png" alt="80 in 8 question with four answer options" loading="lazy" width="1770" height="1260">
+      </div>
+    </section>
+    <section class="about">
+      <h2>About</h2>
+      <div class="features">
+        <div><h3>Free, no strings</h3><p>No ads, no sign-up, and no tracking: the site uses no analytics and no cookies.</p></div>
+        <div><h3>Your data stays yours</h3><p>Games are saved on your own device. Optional sync goes to a private GitHub repository that only you control.</p></div>
+        <div><h3>Independent</h3><p>A personal practice project. Found a bug or have an idea? <a href="https://github.com/amirkhan0725/zetapro/issues">Open an issue on GitHub</a>.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Your games are saved only on your device unless you turn on sync, which uses your own GitHub account.</p>
+    <p>Zetapro v1.1.0 is an independent practice tool, not affiliated with Zetamac or Optiver.</p>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>
