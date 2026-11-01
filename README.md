@@ -2,7 +2,7 @@
   <img src="icons/icon-192.png" alt="" width="88" height="88">
 </p>
 
-<h1 align="center">Zetapro</h1>
+<h1 align="center">QuantSprint</h1>
 
 <p align="center">
   <b>Get faster at mental maths, and see exactly what's slowing you down.</b><br>
@@ -10,9 +10,9 @@
 </p>
 
 <p align="center">
-  <a href="https://amirkhan0725.github.io/zetapro/"><b>Play in your browser</b></a> ·
-  <a href="https://github.com/amirkhan0725/zetapro/releases/latest">Download for Windows</a> ·
-  <a href="https://github.com/amirkhan0725/zetapro/issues">Report a bug</a>
+  <a href="https://amirkhan0725.github.io/quantsprint/"><b>Play in your browser</b></a> ·
+  <a href="https://github.com/amirkhan0725/quantsprint/releases/latest">Download for Windows</a> ·
+  <a href="https://github.com/amirkhan0725/quantsprint/issues">Report a bug</a>
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 
 ## Why
 
-Zetamac is a great way to build arithmetic speed, but a round ends with a single number. Zetapro times every answer, sorts it by problem type (carries, borrows, each times table, 2-digit products, decimal division, fractions…) and shows which types cost you the most time and which mistakes you repeat. It then turns those weak spots into targeted drills, so practice goes where it helps most.
+Zetamac is a great way to build arithmetic speed, but a round ends with a single number. QuantSprint times every answer, sorts it by problem type (carries, borrows, each times table, 2-digit products, decimal division, fractions…) and shows which types cost you the most time and which mistakes you repeat. It then turns those weak spots into targeted drills, so practice goes where it helps most.
 
 ## Features
 
@@ -43,10 +43,10 @@ Zetamac is a great way to build arithmetic speed, but a round ends with a single
 
 | Where | How |
 | --- | --- |
-| **Any browser** | Open [amirkhan0725.github.io/zetapro](https://amirkhan0725.github.io/zetapro/). Nothing to install. |
+| **Any browser** | Open [amirkhan0725.github.io/quantsprint](https://amirkhan0725.github.io/quantsprint/). Nothing to install. |
 | **iPhone** | Open the link in Safari → Share → *Add to Home Screen*. |
 | **Android** | Open the link in Chrome → ⋮ → *Install app*. |
-| **Windows** | [Download the zip](https://github.com/amirkhan0725/zetapro/releases/latest), unzip, run `Zetapro.exe`. It isn't code-signed, so Windows may ask: *More info → Run anyway*. |
+| **Windows** | [Download the zip](https://github.com/amirkhan0725/quantsprint/releases/latest), unzip, run the `.exe`. It isn't code-signed, so Windows may ask: *More info → Run anyway*. |
 
 ## Privacy
 
@@ -54,8 +54,8 @@ No ads, no analytics, no tracking. Games are saved on your device. If you sign i
 
 ## About this repository
 
-This repository holds the **built website and app** that GitHub Pages serves at the link above, plus the Windows downloads under [Releases](https://github.com/amirkhan0725/zetapro/releases). It's published automatically and replaced on each release, so pull requests against these files won't be merged. To suggest something, [open an issue](https://github.com/amirkhan0725/zetapro/issues).
+This repository holds the **built website and app** that GitHub Pages serves at the link above, plus the Windows downloads under [Releases](https://github.com/amirkhan0725/quantsprint/releases). It's published automatically and replaced on each release, so pull requests against these files won't be merged. To suggest something, [open an issue](https://github.com/amirkhan0725/quantsprint/issues).
 
 Built with plain JavaScript (no framework), Electron for the Windows app, and Firebase for optional sign-in and sync.
 
-Zetapro is an independent practice tool, not affiliated with Zetamac or Optiver.
+QuantSprint (formerly Zetapro) is an independent practice tool, not affiliated with Zetamac or Optiver.
