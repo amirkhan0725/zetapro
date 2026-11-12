@@ -1,0 +1,165 @@
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface-2: #efeee9;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #7d7b75;
+  --border: rgba(11, 11, 11, 0.10); --border-strong: rgba(11, 11, 11, 0.16);
+  --accent: #2a78d6; --accent-hover: #256abf;
+  --shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.35);
+  --font: system-ui, "Segoe UI Variable Text", "Segoe UI", -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-2: #1d1d1c;
+    --ink: #f0efec; --ink-2: #b9b8ae; --muted: #85837d;
+    --border: rgba(255, 255, 255, 0.10); --border-strong: rgba(255, 255, 255, 0.18);
+    --accent: #3987e5; --accent-hover: #5598e7;
+    --shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9);
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+
+main { max-width: 1040px; margin: 0 auto; padding: 104px 20px 0; text-align: center; }
+.mark { display: block; margin: 0 auto 22px; border-radius: 12px; }
+h1 { font-size: clamp(40px, 7vw, 60px); font-weight: 650; line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 14px; }
+.tagline { font-size: clamp(17px, 2.2vw, 20px); color: var(--ink-2); max-width: 30em; margin: 0 auto 36px; text-wrap: balance; }
+
+.cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 48px; padding: 0 24px; border-radius: 12px;
+  font-size: 16px; font-weight: 600; text-decoration: none;
+  color: var(--ink); background: transparent; border: 1px solid var(--border-strong);
+  transition: background-color 0.15s;
+}
+.btn:hover { background: var(--surface-2); }
+.btn.primary { color: #fff; background: var(--accent); border-color: transparent; }
+.btn.primary:hover { background: var(--accent-hover); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.points {
+  list-style: none; padding: 0; margin: 40px 0 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 30px;
+  color: var(--muted); font-size: 14.5px;
+}
+.points li::before {
+  content: ""; display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); margin-right: 10px; vertical-align: middle;
+}
+
+.shot, .showcase {
+  display: block; width: 100%; height: auto; margin: 72px auto 0;
+  border-radius: 14px; border: 1px solid var(--border); box-shadow: var(--shadow); background: #0d0d0d;
+}
+
+/* Theme showcase: the Stats page in a few themes, one fading in over the last.
+   The incoming frame fades in on top while the outgoing one stays opaque below it,
+   so the crossfade never dims through the background. */
+.showcase { position: relative; aspect-ratio: 1600 / 997; overflow: hidden; }
+.showcase .frame {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  opacity: 0; transition: opacity 0.8s ease-in-out;
+}
+.showcase .frame.prev { opacity: 1; z-index: 1; transition: none; }
+.showcase .frame.on { opacity: 1; z-index: 2; }
+.theme-chip {
+  position: absolute; right: 12px; bottom: 12px; z-index: 3;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 12px; line-height: 1.6; letter-spacing: 0.01em; white-space: nowrap;
+  color: rgba(255, 255, 255, 0.86); background: rgba(20, 20, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: opacity 0.3s ease;
+}
+.theme-chip.swap { opacity: 0; }
+
+/* Wide screens: the words on the left, the screenshot on the right, so the page
+   isn't a narrow-to-wide stack of centered lines. Phones keep the single column. */
+@media (min-width: 960px) {
+  .hero {
+    max-width: 1200px; padding: 0 40px; min-height: calc(100vh - 150px);
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: center;
+    text-align: left;
+  }
+  .hero .mark { margin: 0 0 22px; }
+  .hero .tagline { margin: 0 0 32px; max-width: 21em; text-wrap: pretty; }
+  .hero .cta { justify-content: flex-start; }
+  .hero .points { flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 32px; }
+  .hero .shot, .hero .showcase { margin: 0; }
+  .hero + footer { max-width: 1200px; padding-top: 24px; }
+}
+
+footer { max-width: 1040px; margin: 0 auto; padding: 56px 20px 48px; color: var(--muted); font-size: 13.5px; text-align: center; }
+footer i { font-style: normal; margin: 0 8px; }
+footer a { color: inherit; text-underline-offset: 3px; }
+footer a:hover { color: var(--ink); }
+
+footer .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; margin-bottom: 12px; }
+
+/* Content pages (FAQ and guides): one readable column, same tokens as the front page. */
+.top { max-width: 760px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 650; font-size: 17px; color: var(--ink); text-decoration: none; }
+.brand img { border-radius: 7px; }
+.btn.small { height: 38px; padding: 0 16px; font-size: 14.5px; border-radius: 10px; }
+.page main { max-width: 760px; padding: 36px 20px 0; text-align: left; }
+.page h1 { font-size: clamp(30px, 5vw, 42px); letter-spacing: -0.025em; margin-bottom: 16px; }
+.lede { font-size: 18px; color: var(--ink-2); margin: 0 0 8px; }
+.prose h2 { font-size: 21px; font-weight: 650; letter-spacing: -0.01em; line-height: 1.3; margin: 40px 0 10px; }
+.prose h3 { font-size: 17px; font-weight: 650; margin: 26px 0 6px; }
+.prose p, .prose li { color: var(--ink-2); }
+.prose p { margin: 0 0 14px; }
+.prose ul, .prose ol { padding-left: 22px; margin: 0 0 14px; }
+.prose li { margin-bottom: 6px; }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose a { color: var(--accent); text-underline-offset: 3px; }
+.prose a.btn { color: var(--ink); }
+.prose a.btn.primary { color: #fff; }
+.prose .cta { justify-content: flex-start; margin: 28px 0 8px; }
+.prose .meta { color: var(--muted); font-size: 14px; margin: -8px 0 14px; }
+.prose .lede + .meta { margin-top: 0; }
+.prose .note { color: var(--muted); font-size: 14.5px; border-top: 1px solid var(--border); padding-top: 18px; margin-top: 40px; }
+
+@media (max-width: 600px) {
+  main { padding-top: 64px; }
+  .page main { padding-top: 20px; }
+  .cta { flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; }
+  .prose .cta { margin: 24px 0 8px; }
+  .points { display: grid; justify-content: center; justify-items: start; gap: 6px; margin-top: 32px; }
+  .shot, .showcase { margin-top: 48px; border-radius: 10px; }
+  .theme-chip { right: 8px; bottom: 8px; padding: 2px 8px; font-size: 11px; }
+  footer { padding-top: 40px; line-height: 1.9; }
+  footer > span, footer > a { display: block; width: fit-content; margin: 0 auto; }
+  footer i { display: none; }
+}
+
+/* Typed name (site.js): letters keep their space while hidden; the caret takes none. */
+.tw-ch { visibility: hidden; }
+.tw-ch.on { visibility: visible; }
+.tw-caret {
+  display: inline-block; width: 0; height: 0.82em; margin-left: 0.06em; margin-right: -0.06em;
+  border-right: 0.06em solid var(--accent); vertical-align: -0.04em;
+  animation: tw-blink 1.1s steps(1) infinite;
+}
+@keyframes tw-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .tw-caret { animation: none; } }
+
+/* Phones: a size up across the board, so nothing reads small on a small screen. */
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+  .tagline { font-size: 19px; line-height: 1.5; }
+  .btn { font-size: 17px; height: 52px; }
+  .points { font-size: 16.5px; gap: 10px; }
+  footer { font-size: 15px; }
+  footer .links { gap: 6px 22px; }
+  .lede { font-size: 19px; }
+  .prose p, .prose li { font-size: 17px; line-height: 1.65; }
+  .prose h2 { font-size: 22px; }
+  .prose h3 { font-size: 18px; }
+  .prose .meta, .prose .note { font-size: 15.5px; }
+  .btn.small { font-size: 15.5px; height: 42px; }
+  .brand { font-size: 18px; }
+  .theme-chip { font-size: 12px; }
+}
